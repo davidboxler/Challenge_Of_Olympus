@@ -93,7 +93,7 @@ export class Game extends Scene {
     this.physics.add.collider(this.player2, this.platform);
 
     // Crear la plataforma
-    this.platform2 = this.physics.add.sprite(700, 300, "platform_move");
+    this.platform2 = this.physics.add.sprite(700, 340, "platform_move");
 
     // Establecer los límites de movimiento
     this.platform2.body.setAllowGravity(false);
@@ -159,7 +159,7 @@ export class Game extends Scene {
       this.player1.anims.play("turn");
     } //jump
     if (this.cursors.up.isDown && this.player1.body.blocked.down) {
-      this.player1.setVelocityY(-300);
+      this.player1.setVelocityY(-313);
     }
     //move left player 2
     if (this.wasdKeys.left.isDown) {
@@ -175,7 +175,7 @@ export class Game extends Scene {
       this.player2.anims.play("turn");
     } //jump player 2
     if (this.wasdKeys.up.isDown && this.player2.body.blocked.down) {
-      this.player2.setVelocityY(-300);
+      this.player2.setVelocityY(-313);
     }
     //Funcion cadena
     this.updateChain();
