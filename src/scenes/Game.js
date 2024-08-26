@@ -37,13 +37,26 @@ export class Game extends Scene {
       spawnPoint_1.y,
       "player1"
     );
+    this.player2 = this.physics.add.sprite(
+      spawnPoint_1.x,
+      spawnPoint_1.y,
+      "player2"
+    );
 
     this.player1.setBounce(0.1);
     this.player1.setCollideWorldBounds(true);
+    this.player2.setBounce(0.1);
+    this.player2.setCollideWorldBounds(true);
 
     this.cursors = this.input.keyboard.createCursorKeys();
+    this.wasdKeys = this.input.keyboard.addKeys({
+      up: Phaser.Input.Keyboard.KeyCodes.W,
+      left: Phaser.Input.Keyboard.KeyCodes.A,
+      right: Phaser.Input.Keyboard.KeyCodes.D
+  });
 
     this.physics.add.collider(this.player1, rockLayer);
+    this.physics.add.collider(this.player2, rockLayer);
 
     // Crear la plataforma
     this.platform = this.physics.add.sprite(400, 650, "platform_move");
@@ -61,6 +74,7 @@ export class Game extends Scene {
     this.platform.body.velocity.x = this.platform.speed;
 
     this.physics.add.collider(this.player1, this.platform);
+    this.physics.add.collider(this.player2, this.platform);
 
     // Crear la plataforma
     this.platform2 = this.physics.add.sprite(700, 300, "platform_move");
@@ -78,6 +92,7 @@ export class Game extends Scene {
     this.platform2.body.velocity.x = this.platform2.speed;
 
     this.physics.add.collider(this.player1, this.platform2);
+    this.physics.add.collider(this.player2, this.platform2);
 
     // Crear la plataforma
     this.platform3 = this.physics.add.sprite(1050, 250, "platform_move");
@@ -88,6 +103,7 @@ export class Game extends Scene {
 
     // Añadir el collider entre el jugador y la plataforma
     this.physics.add.collider(this.player1, this.platform3, this.handlePlatformCollision, null, this);
+    this.physics.add.collider(this.player2, this.platform3, this.handlePlatformCollision, null, this);
 
     // Crear la plataforma
     this.platform4 = this.physics.add.sprite(1200, 250, "platform_move");
@@ -97,6 +113,7 @@ export class Game extends Scene {
     this.platform4.body.setImmovable(true);
 
     this.physics.add.collider(this.player1, this.platform4);
+    this.physics.add.collider(this.player2, this.platform4);
   }
 
   // Función para manejar la colisión
@@ -127,6 +144,22 @@ export class Game extends Scene {
     } //jump
     if (this.cursors.up.isDown && this.player1.body.blocked.down) {
       this.player1.setVelocityY(-330);
+    }
+    //move left player 2
+    if (this.wasdKeys.left.isDown) {
+      this.player2.setVelocityX(-160);
+      this.player2.anims.play("left", true);
+    } //move right player 2
+    else if (this.wasdKeys.right.isDown) {
+      this.player2.setVelocityX(160);
+      this.player2.anims.play("right", true);
+    } //stop
+    else {
+      this.player2.setVelocityX(0);
+      this.player2.anims.play("turn");
+    } //jump player 2
+    if (this.wasdKeys.up.isDown && this.player2.body.blocked.down) {
+      this.player2.setVelocityY(-330);
     }
 
     // Invertir la dirección si llega a un límite
