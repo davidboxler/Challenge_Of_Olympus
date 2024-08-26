@@ -1,0 +1,41 @@
+{
+	"textures": [
+		{
+			"image": "rock_5.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 77,
+				"h": 222
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "rock_5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 87,
+						"h": 228
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 1,
+						"w": 75,
+						"h": 220
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 75,
+						"h": 220
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:db5c432749a074889bbe4252d34ce38e:83e54f2db8a6fd145a0899751f815966:3261dc358e3443ceffd40fa6b560959d$"
+	}
+}

@@ -1,0 +1,41 @@
+{
+	"textures": [
+		{
+			"image": "tree_3.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 223,
+				"h": 261
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "tree_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 252,
+						"h": 278
+					},
+					"spriteSourceSize": {
+						"x": 17,
+						"y": 2,
+						"w": 221,
+						"h": 259
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 221,
+						"h": 259
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:e261f395bd6c451e0e9b0fea3e94014a:ee5822e26ad65ae400d1cb1aa68f0f40:68064f71b053fe78d1e07f7491dba3a6$"
+	}
+}
