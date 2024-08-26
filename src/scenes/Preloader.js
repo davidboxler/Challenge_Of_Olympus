@@ -25,6 +25,7 @@ export class Preloader extends Scene {
       frameWidth: 32,
       frameHeight: 48,
     });
+    this.load.image("chain", "./src/images/chain.png");
   }
 
   create() {

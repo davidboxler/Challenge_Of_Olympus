@@ -4,7 +4,11 @@ export class Game extends Scene {
   constructor() {
     super("Game");
   }
-
+ init() {
+  this.segmentLength = 12; // Longitud de cada segmento
+        this.segmentCount = 5;  // Número de segmentos en la cadena
+        this.maxDistance = this.segmentLength * (this.segmentCount); // Distancia máxima permitida
+ }
   create() {
     const mapN1 = this.make.tilemap({ key: "mapN1" });
 
@@ -57,7 +61,19 @@ export class Game extends Scene {
 
     this.physics.add.collider(this.player1, rockLayer);
     this.physics.add.collider(this.player2, rockLayer);
-
+//----------------------------------------------------------------------Cadena ----------------------------------
+  // Crear los segmentos de la cadena
+  this.segments = [];
+  for (let i = 0; i < this.segmentCount; i++) {
+      const segment = this.physics.add.sprite(0, 0, 'chain');
+      segment.setScale(0.7);
+      segment.body.immovable = true;
+      segment.body.moves = false;
+      this.segments.push(segment);
+  }
+  const offsetY = 100;
+  this.segments[0].setPosition(this.player1.x, this.player1.y * offsetY);
+  this.segments[this.segmentCount - 1].setPosition(this.player2.x, this.player2.y);
     // Crear la plataforma
     this.platform = this.physics.add.sprite(400, 650, "platform_move");
 
@@ -143,7 +159,7 @@ export class Game extends Scene {
       this.player1.anims.play("turn");
     } //jump
     if (this.cursors.up.isDown && this.player1.body.blocked.down) {
-      this.player1.setVelocityY(-330);
+      this.player1.setVelocityY(-300);
     }
     //move left player 2
     if (this.wasdKeys.left.isDown) {
@@ -159,8 +175,10 @@ export class Game extends Scene {
       this.player2.anims.play("turn");
     } //jump player 2
     if (this.wasdKeys.up.isDown && this.player2.body.blocked.down) {
-      this.player2.setVelocityY(-330);
+      this.player2.setVelocityY(-300);
     }
+    //Funcion cadena
+    this.updateChain();
 
     // Invertir la dirección si llega a un límite
     if (this.platform.x <= this.platform.minX) {
@@ -176,4 +194,39 @@ export class Game extends Scene {
       this.platform2.body.velocity.x = -this.platform2.speed;
     }
   }
+  updateChain() {
+    const offsetY = 15;
+    // Calcular la distancia actual entre los dos personajes
+    const distance = Phaser.Math.Distance.Between(this.player1.x, this.player1.y, this.player2.x, this.player2.y);
+
+    // Si la distancia es mayor que la distancia máxima permitida
+    if (distance > this.maxDistance) {
+        const angle = Phaser.Math.Angle.Between(this.player1.x, this.player1.y, this.player2.x, this.player2.y);
+        const overlap = distance - this.maxDistance;
+
+        // Calcular el punto intermedio entre los dos personajes
+        const midX = (this.player1.x + this.player2.x) / 2;
+        const midY = (this.player1.y + this.player2.y) / 2;
+
+        // Interpolar suavemente la posición de los personajes hacia el punto intermedio
+        const t = 3; // Factor de interpolación (ajusta según sea necesario)
+        this.player1.x = Phaser.Math.Linear(this.player1.x, midX - Math.cos(angle) * this.maxDistance / 2, t);
+        this.player1.y = Phaser.Math.Linear(this.player1.y, midY - Math.sin(angle) * this.maxDistance / 2, t);
+        this.player2.x = Phaser.Math.Linear(this.player2.x, midX + Math.cos(angle) * this.maxDistance / 2, t);
+        this.player2.y = Phaser.Math.Linear(this.player2.y, midY + Math.sin(angle) * this.maxDistance / 2, t);
+    }
+
+    // Actualizar la posición de los segmentos intermedios
+    this.segments[0].setPosition(this.player1.x, this.player1.y + offsetY);
+    this.segments[this.segmentCount - 1].setPosition(this.player2.x, this.player2.y + offsetY) ;
+
+    for (let i = 1; i < this.segmentCount - 1; i++) {
+        const seg1 = this.segments[i - 1];
+        const seg2 = this.segments[i + 1];
+        const angle = Phaser.Math.Angle.Between(seg1.x, seg1.y, seg2.x, seg2.y);
+
+        this.segments[i].x = seg1.x + Math.cos(angle) * this.segmentLength;
+        this.segments[i].y = seg1.y + Math.sin(angle) * this.segmentLength;
+    }
+}
 }
