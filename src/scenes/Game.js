@@ -93,7 +93,7 @@ export class Game extends Scene {
     this.physics.add.collider(this.player2, this.platform);
 
     // Crear la plataforma
-    this.platform2 = this.physics.add.sprite(700, 340, "platform_move");
+    this.platform2 = this.physics.add.sprite(700, 350, "platform_move");
 
     // Establecer los límites de movimiento
     this.platform2.body.setAllowGravity(false);
@@ -111,7 +111,7 @@ export class Game extends Scene {
     this.physics.add.collider(this.player2, this.platform2);
 
     // Crear la plataforma
-    this.platform3 = this.physics.add.sprite(1050, 250, "platform_move");
+    this.platform3 = this.physics.add.sprite(1050, 260, "platform_move");
 
     // Establecer los límites de movimiento
     this.platform3.body.setAllowGravity(false);
@@ -122,7 +122,7 @@ export class Game extends Scene {
     this.physics.add.collider(this.player2, this.platform3, this.handlePlatformCollision, null, this);
 
     // Crear la plataforma
-    this.platform4 = this.physics.add.sprite(1200, 250, "platform_move");
+    this.platform4 = this.physics.add.sprite(1200, 260, "platform_move");
 
     // Establecer los límites de movimiento
     this.platform4.body.setAllowGravity(false);
