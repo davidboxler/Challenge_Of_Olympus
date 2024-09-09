@@ -20,7 +20,7 @@ export class MainMenu extends Scene
 
         gameText.on('pointerdown', () => {
 
-            this.scene.start('Game');
+            this.scene.start('ModeSel');
 
         });
         const optText = this.add.text(750, 350, 'Options', {
