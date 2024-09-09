@@ -1,4 +1,6 @@
 import { Game } from "./scenes/Game";
+import { Credits } from "./scenes/Credits";
+import { Options } from "./scenes/Options";
 import { Preloader } from "./scenes/Preloader";
 import { MainMenu } from "./scenes/MainMenu";
 
@@ -21,7 +23,7 @@ const config = {
       debug: false,
     },
   },
-  scene: [Preloader, MainMenu, Game],
+  scene: [Preloader, MainMenu, Game, Credits, Options],
 };
 
 export default new Phaser.Game(config);

@@ -12,7 +12,7 @@ export class MainMenu extends Scene
         this.add.image(800, 300, 'bg').setScale(1.7);
 
 
-        const gameText = this.add.text(750, 250, 'Main Menu', {
+        const gameText = this.add.text(750, 250, 'Play', {
             fontFamily: 'Arial Black', fontSize: 38, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
@@ -31,7 +31,7 @@ export class MainMenu extends Scene
 
         optText.on('pointerdown', () => {
 
-            this.scene.start('Game');
+            this.scene.start('Options');
 
         });
         const CredText = this.add.text(750, 450, 'Creditos', {
@@ -42,7 +42,7 @@ export class MainMenu extends Scene
 
         CredText.on('pointerdown', () => {
 
-            this.scene.start('Game');
+            this.scene.start('Credits');
 
         });
     }
