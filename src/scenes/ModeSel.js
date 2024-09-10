@@ -23,7 +23,7 @@ export class ModeSel extends Scene
 
         });
         const versusText = this.add.text(750, 450, 'Play Versus', {
-            fontFamily: 'Arial Black', fontSize: 38, color: '#ffffff',
+            fontFamily: 'Arial Black', fontSize: 37, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5).setInteractive();
