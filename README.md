@@ -5,7 +5,7 @@ This game was created by students from the National University of Rafaela for th
 Participants:
 - **Programmer :** David Boxler  follow on [GitHub Profile](https://github.com/davidboxler)<br />
 - **Artist :** Melina Esteban  follow on [GitHub Profile](https://github.com/MeliEsteban)<br />
-- **Orchestra :** Agustin Tournour  follow on [GitHub Profile](https://github.com/ATour02_)<br />
+- **Orchestra :** Agustin Tournour  follow on [GitHub Profile](https://github.com/ATour02)<br />
 
 
 **[This Template is also available as a TypeScript version.](https://github.com/phaserjs/template-vite-ts)**
