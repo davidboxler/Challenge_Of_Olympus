@@ -1,5 +1,10 @@
 import { Game } from "./scenes/Game";
+import { Versus } from "./scenes/Versus";
+import { Credits } from "./scenes/Credits";
+import { Options } from "./scenes/Options";
 import { Preloader } from "./scenes/Preloader";
+import { ModeSel } from "./scenes/ModeSel";
+import { MainMenu } from "./scenes/MainMenu";
 
 //  Find out more information about the Game Config at:
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
@@ -20,7 +25,7 @@ const config = {
       debug: false,
     },
   },
-  scene: [Preloader, Game],
+  scene: [Preloader, MainMenu, Game, Credits, Options, ModeSel, Versus],
 };
 
 export default new Phaser.Game(config);

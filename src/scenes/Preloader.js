@@ -7,6 +7,7 @@ export class Preloader extends Scene {
 
   preload() {
     this.load.tilemapTiledJSON("mapN1", "/src/tilemaps/level3.json");
+    this.load.image("bg", "./public/assets/bg.png" );
     this.load.image("hades", "/src/images/fondonuevo.png");
     this.load.image("spikes", "src/images/spikes_1.png");
     this.load.image("rock1", "src/images/rock_1.png");
@@ -70,6 +71,6 @@ export class Preloader extends Scene {
     });
 
 
-    this.scene.start("Game");
+    this.scene.start("MainMenu");
   }
 }

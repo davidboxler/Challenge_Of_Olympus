@@ -1,6 +1,12 @@
-# Phaser Vite Template
+# Challenge Of Olympus
 
-This is a Phaser 3 project template that uses Vite for bundling. It supports hot-reloading for quick development workflow and includes scripts to generate production-ready builds.
+This game was created by students from the National University of Rafaela for the course "Taller de Juegos 2 - Programación 2".
+
+Participants:
+- **Programmer :** David Boxler  follow on [GitHub Profile](https://github.com/davidboxler)<br />
+- **Artist :** Melina Esteban  follow on [GitHub Profile](https://github.com/MeliEsteban)<br />
+- **Orchestra :** Agustin Tournour  follow on [GitHub Profile](https://github.com/ATour02)<br />
+
 
 **[This Template is also available as a TypeScript version.](https://github.com/phaserjs/template-vite-ts)**
 
