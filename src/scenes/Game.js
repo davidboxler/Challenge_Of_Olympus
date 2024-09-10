@@ -4,11 +4,11 @@ export class Game extends Scene {
   constructor() {
     super("Game");
   }
- init() {
-  this.segmentLength = 12; // Longitud de cada segmento
-        this.segmentCount = 5;  // Número de segmentos en la cadena
-        this.maxDistance = this.segmentLength * (this.segmentCount); // Distancia máxima permitida
- }
+  init() {
+    this.segmentLength = 12; // Longitud de cada segmento
+    this.segmentCount = 5; // Número de segmentos en la cadena
+    this.maxDistance = this.segmentLength * this.segmentCount; // Distancia máxima permitida
+  }
   create() {
     const mapN1 = this.make.tilemap({ key: "mapN1" });
 
@@ -56,24 +56,27 @@ export class Game extends Scene {
     this.wasdKeys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
       left: Phaser.Input.Keyboard.KeyCodes.A,
-      right: Phaser.Input.Keyboard.KeyCodes.D
-  });
+      right: Phaser.Input.Keyboard.KeyCodes.D,
+    });
 
     this.physics.add.collider(this.player1, rockLayer);
     this.physics.add.collider(this.player2, rockLayer);
-//----------------------------------------------------------------------Cadena ----------------------------------
-  // Crear los segmentos de la cadena
-  this.segments = [];
-  for (let i = 0; i < this.segmentCount; i++) {
-      const segment = this.physics.add.sprite(0, 0, 'chain');
+    //----------------------------------------------------------------------Cadena ----------------------------------
+    // Crear los segmentos de la cadena
+    this.segments = [];
+    for (let i = 0; i < this.segmentCount; i++) {
+      const segment = this.physics.add.sprite(0, 0, "chain");
       segment.setScale(0.7);
       segment.body.immovable = true;
       segment.body.moves = false;
       this.segments.push(segment);
-  }
-  const offsetY = 100;
-  this.segments[0].setPosition(this.player1.x, this.player1.y * offsetY);
-  this.segments[this.segmentCount - 1].setPosition(this.player2.x, this.player2.y);
+    }
+    const offsetY = 100;
+    this.segments[0].setPosition(this.player1.x, this.player1.y * offsetY);
+    this.segments[this.segmentCount - 1].setPosition(
+      this.player2.x,
+      this.player2.y
+    );
     // Crear la plataforma
     this.platform = this.physics.add.sprite(400, 650, "platform_move");
 
@@ -118,8 +121,20 @@ export class Game extends Scene {
     this.platform3.body.setImmovable(true);
 
     // Añadir el collider entre el jugador y la plataforma
-    this.physics.add.collider(this.player1, this.platform3, this.handlePlatformCollision, null, this);
-    this.physics.add.collider(this.player2, this.platform3, this.handlePlatformCollision, null, this);
+    this.physics.add.collider(
+      this.player1,
+      this.platform3,
+      this.handlePlatformCollision,
+      null,
+      this
+    );
+    this.physics.add.collider(
+      this.player2,
+      this.platform3,
+      this.handlePlatformCollision,
+      null,
+      this
+    );
 
     // Crear la plataforma
     this.platform4 = this.physics.add.sprite(1200, 260, "platform_move");
@@ -134,13 +149,16 @@ export class Game extends Scene {
 
   // Función para manejar la colisión
   handlePlatformCollision(player, platform) {
-    // Hacer que la plataforma caiga
-    platform.body.setAllowGravity(true);
-    platform.body.setImmovable(false);
+    // Esperar 5 segundos antes de hacer que la plataforma comience a caer
+    this.time.delayedCall(1000, () => {
+      // Hacer que la plataforma caiga después de 5 segundos
+      platform.body.setAllowGravity(true);
+      platform.body.setImmovable(false);
 
-    // Eliminar la plataforma después de 2 segundos
-    this.time.delayedCall(2000, () => {
-      platform.destroy(); // Desaparecer la plataforma
+      // Eliminar la plataforma después de 2 segundos desde que comenzó a caer
+      this.time.delayedCall(2000, () => {
+        platform.destroy(); // Desaparecer la plataforma
+      });
     });
   }
 
@@ -197,36 +215,65 @@ export class Game extends Scene {
   updateChain() {
     const offsetY = 15;
     // Calcular la distancia actual entre los dos personajes
-    const distance = Phaser.Math.Distance.Between(this.player1.x, this.player1.y, this.player2.x, this.player2.y);
+    const distance = Phaser.Math.Distance.Between(
+      this.player1.x,
+      this.player1.y,
+      this.player2.x,
+      this.player2.y
+    );
 
     // Si la distancia es mayor que la distancia máxima permitida
     if (distance > this.maxDistance) {
-        const angle = Phaser.Math.Angle.Between(this.player1.x, this.player1.y, this.player2.x, this.player2.y);
-        const overlap = distance - this.maxDistance;
+      const angle = Phaser.Math.Angle.Between(
+        this.player1.x,
+        this.player1.y,
+        this.player2.x,
+        this.player2.y
+      );
+      const overlap = distance - this.maxDistance;
 
-        // Calcular el punto intermedio entre los dos personajes
-        const midX = (this.player1.x + this.player2.x) / 2;
-        const midY = (this.player1.y + this.player2.y) / 2;
+      // Calcular el punto intermedio entre los dos personajes
+      const midX = (this.player1.x + this.player2.x) / 2;
+      const midY = (this.player1.y + this.player2.y) / 2;
 
-        // Interpolar suavemente la posición de los personajes hacia el punto intermedio
-        const t = 3; // Factor de interpolación (ajusta según sea necesario)
-        this.player1.x = Phaser.Math.Linear(this.player1.x, midX - Math.cos(angle) * this.maxDistance / 2, t);
-        this.player1.y = Phaser.Math.Linear(this.player1.y, midY - Math.sin(angle) * this.maxDistance / 2, t);
-        this.player2.x = Phaser.Math.Linear(this.player2.x, midX + Math.cos(angle) * this.maxDistance / 2, t);
-        this.player2.y = Phaser.Math.Linear(this.player2.y, midY + Math.sin(angle) * this.maxDistance / 2, t);
+      // Interpolar suavemente la posición de los personajes hacia el punto intermedio
+      const t = 3; // Factor de interpolación (ajusta según sea necesario)
+      this.player1.x = Phaser.Math.Linear(
+        this.player1.x,
+        midX - (Math.cos(angle) * this.maxDistance) / 2,
+        t
+      );
+      this.player1.y = Phaser.Math.Linear(
+        this.player1.y,
+        midY - (Math.sin(angle) * this.maxDistance) / 2,
+        t
+      );
+      this.player2.x = Phaser.Math.Linear(
+        this.player2.x,
+        midX + (Math.cos(angle) * this.maxDistance) / 2,
+        t
+      );
+      this.player2.y = Phaser.Math.Linear(
+        this.player2.y,
+        midY + (Math.sin(angle) * this.maxDistance) / 2,
+        t
+      );
     }
 
     // Actualizar la posición de los segmentos intermedios
     this.segments[0].setPosition(this.player1.x, this.player1.y + offsetY);
-    this.segments[this.segmentCount - 1].setPosition(this.player2.x, this.player2.y + offsetY) ;
+    this.segments[this.segmentCount - 1].setPosition(
+      this.player2.x,
+      this.player2.y + offsetY
+    );
 
     for (let i = 1; i < this.segmentCount - 1; i++) {
-        const seg1 = this.segments[i - 1];
-        const seg2 = this.segments[i + 1];
-        const angle = Phaser.Math.Angle.Between(seg1.x, seg1.y, seg2.x, seg2.y);
+      const seg1 = this.segments[i - 1];
+      const seg2 = this.segments[i + 1];
+      const angle = Phaser.Math.Angle.Between(seg1.x, seg1.y, seg2.x, seg2.y);
 
-        this.segments[i].x = seg1.x + Math.cos(angle) * this.segmentLength;
-        this.segments[i].y = seg1.y + Math.sin(angle) * this.segmentLength;
+      this.segments[i].x = seg1.x + Math.cos(angle) * this.segmentLength;
+      this.segments[i].y = seg1.y + Math.sin(angle) * this.segmentLength;
     }
-}
+  }
 }
