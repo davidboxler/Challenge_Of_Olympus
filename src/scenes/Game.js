@@ -1,5 +1,6 @@
 import { Scene } from "phaser";
 import { createTilemapLayer, addTileset, findObjectByName } from './../components/TileMapUtil';
+import { Obstacle, MovingObstacle } from './../entities/Obstacles';
 
 export class Game extends Scene {
   constructor() {
@@ -50,47 +51,6 @@ export class Game extends Scene {
 
     this.physics.add.collider(this.player1, rockLayer);
     this.physics.add.collider(this.player2, rockLayer);
-    /* const mapN1 = this.make.tilemap({ key: "mapN1" });
-
-    const background = mapN1.addTilesetImage("fondonuevo", "hades");
-    const floor1 = mapN1.addTilesetImage("floor_6", "floor3");
-    const floor2 = mapN1.addTilesetImage("floor_5", "floor2");
-    const floor3 = mapN1.addTilesetImage("floor_1", "floor1");
-    const floor4 = mapN1.addTilesetImage("floor_4", "floor4");
-    const wall = mapN1.addTilesetImage("wall2", "wall");
-    const rock = mapN1.addTilesetImage("rock_1", "rock1");
-
-    const backgroundLayer = mapN1.createLayer("background", background, 0, 0);
-    const floor1Layer = mapN1.createLayer("floor_1", floor2, 0, 0);
-    const floor2Layer = mapN1.createLayer("floor_2", floor1, 0, 0);
-    const floor3Layer = mapN1.createLayer("floor_3", floor3, 0, 0);
-    const floor4Layer = mapN1.createLayer("floor_4", floor4, 0, 0);
-    const wallLayer = mapN1.createLayer("walls", wall, 0, 0);
-    const rockLayer = mapN1.createLayer("platform", rock, 0, 0);
-
-    const objectsLayer = mapN1.getObjectLayer("objects");
-    rockLayer.setCollisionByProperty({ colision: true });
-
-    let spawnPoint_1 = mapN1.findObject(
-      "objects",
-      (obj) => obj.name === "player_1"
-    );
-
-    this.player1 = this.physics.add.sprite(
-      spawnPoint_1.x,
-      spawnPoint_1.y,
-      "player1"
-    );
-    this.player2 = this.physics.add.sprite(
-      spawnPoint_1.x,
-      spawnPoint_1.y,
-      "player2"
-    );
-
-    this.player1.setBounce(0.1);
-    this.player1.setCollideWorldBounds(true);
-    this.player2.setBounce(0.1);
-    this.player2.setCollideWorldBounds(true); */
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.wasdKeys = this.input.keyboard.addKeys({
@@ -98,9 +58,6 @@ export class Game extends Scene {
       left: Phaser.Input.Keyboard.KeyCodes.A,
       right: Phaser.Input.Keyboard.KeyCodes.D,
     });
-
-    this.physics.add.collider(this.player1, rockLayer);
-    this.physics.add.collider(this.player2, rockLayer);
     //----------------------------------------------------------------------Cadena ----------------------------------
     // Crear los segmentos de la cadena
     this.segments = [];
@@ -117,7 +74,25 @@ export class Game extends Scene {
       this.player2.x,
       this.player2.y
     );
-    // Crear la plataforma
+    // ----------------------------------- Platform --------------------------
+    this.obstacle = new MovingObstacle(this, 400, 650, "platform_move", {
+      minX: 550,
+      maxX: 800,
+      speed: 100
+    });
+    this.obstacle.body.setAllowGravity(false);
+    this.physics.add.collider(this.player1, this.obstacle);
+    this.physics.add.collider(this.player2, this.obstacle);
+
+    this.obstacle2 = new MovingObstacle(this, 700, 350, "platform_move", {
+      minX: 700,
+      maxX: 850,
+      speed: 100
+    });
+    this.obstacle2.body.setAllowGravity(false);
+    this.physics.add.collider(this.player1, this.obstacle2);
+    this.physics.add.collider(this.player2, this.obstacle2);
+    /* // Crear la plataforma
     this.platform = this.physics.add.sprite(400, 650, "platform_move");
 
     // Establecer los límites de movimiento
@@ -151,7 +126,7 @@ export class Game extends Scene {
     this.platform2.body.velocity.x = this.platform2.speed;
 
     this.physics.add.collider(this.player1, this.platform2);
-    this.physics.add.collider(this.player2, this.platform2);
+    this.physics.add.collider(this.player2, this.platform2); */
 
     // Crear la plataforma
     this.platform3 = this.physics.add.sprite(1050, 260, "platform_move");
@@ -238,19 +213,25 @@ export class Game extends Scene {
     //Funcion cadena
     this.updateChain();
 
-    // Invertir la dirección si llega a un límite
+    if (this.obstacle instanceof MovingObstacle) {
+      this.obstacle.update();
+    }
+    if (this.obstacle2 instanceof MovingObstacle) {
+      this.obstacle2.update();
+    }
+    /* // Invertir la dirección si llega a un límite
     if (this.platform.x <= this.platform.minX) {
       this.platform.body.velocity.x = this.platform.speed;
     } else if (this.platform.x >= this.platform.maxX) {
       this.platform.body.velocity.x = -this.platform.speed;
-    }
+    } */
 
     // Invertir la dirección si llega a un límite
-    if (this.platform2.x <= this.platform2.minX) {
+    /* if (this.platform2.x <= this.platform2.minX) {
       this.platform2.body.velocity.x = this.platform2.speed;
     } else if (this.platform2.x >= this.platform2.maxX) {
       this.platform2.body.velocity.x = -this.platform2.speed;
-    }
+    } */
   }
   updateChain() {
     const offsetY = 15;
