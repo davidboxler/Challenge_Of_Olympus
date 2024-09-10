@@ -1,4 +1,5 @@
 import { Scene } from "phaser";
+import { createTilemapLayer, addTileset, findObjectByName } from './../components/TileMapUtil';
 
 export class Game extends Scene {
   constructor() {
@@ -10,7 +11,46 @@ export class Game extends Scene {
     this.maxDistance = this.segmentLength * this.segmentCount; // Distancia máxima permitida
   }
   create() {
+    // Crear el tilemap
     const mapN1 = this.make.tilemap({ key: "mapN1" });
+
+    // Añadir los tilesets usando la función modularizada
+    const background = addTileset(mapN1, "fondonuevo", "hades");
+    const floor1 = addTileset(mapN1, "floor_6", "floor3");
+    const floor2 = addTileset(mapN1, "floor_5", "floor2");
+    const floor3 = addTileset(mapN1, "floor_1", "floor1");
+    const floor4 = addTileset(mapN1, "floor_4", "floor4");
+    const wall = addTileset(mapN1, "wall2", "wall");
+    const rock = addTileset(mapN1, "rock_1", "rock1");
+
+    // Crear las capas del tilemap
+    const backgroundLayer = createTilemapLayer(mapN1, "background", background);
+    const floor1Layer = createTilemapLayer(mapN1, "floor_1", floor2);
+    const floor2Layer = createTilemapLayer(mapN1, "floor_2", floor1);
+    const floor3Layer = createTilemapLayer(mapN1, "floor_3", floor3);
+    const floor4Layer = createTilemapLayer(mapN1, "floor_4", floor4);
+    const wallLayer = createTilemapLayer(mapN1, "walls", wall);
+    const rockLayer = createTilemapLayer(mapN1, "platform", rock);
+
+    // Configurar colisiones en la capa rockLayer
+    rockLayer.setCollisionByProperty({ colision: true });
+
+    // Encontrar el punto de spawn para el jugador 1 usando la función modularizada
+    const spawnPoint_1 = findObjectByName(mapN1, "objects", "player_1");
+
+    // Crear los jugadores usando las coordenadas del spawn point
+    this.player1 = this.physics.add.sprite(spawnPoint_1.x, spawnPoint_1.y, "player1");
+    this.player2 = this.physics.add.sprite(spawnPoint_1.x, spawnPoint_1.y, "player2");
+
+    // Configurar propiedades y colisiones para los jugadores
+    this.player1.setBounce(0.1);
+    this.player1.setCollideWorldBounds(true);
+    this.player2.setBounce(0.1);
+    this.player2.setCollideWorldBounds(true);
+
+    this.physics.add.collider(this.player1, rockLayer);
+    this.physics.add.collider(this.player2, rockLayer);
+    /* const mapN1 = this.make.tilemap({ key: "mapN1" });
 
     const background = mapN1.addTilesetImage("fondonuevo", "hades");
     const floor1 = mapN1.addTilesetImage("floor_6", "floor3");
@@ -50,7 +90,7 @@ export class Game extends Scene {
     this.player1.setBounce(0.1);
     this.player1.setCollideWorldBounds(true);
     this.player2.setBounce(0.1);
-    this.player2.setCollideWorldBounds(true);
+    this.player2.setCollideWorldBounds(true); */
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.wasdKeys = this.input.keyboard.addKeys({
