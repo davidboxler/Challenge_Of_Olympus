@@ -1,6 +1,6 @@
 import { Scene } from "phaser";
 import { createTilemapLayer, addTileset, findObjectByName } from './../components/TileMapUtil';
-import { Obstacle, MovingObstacle } from './../entities/Obstacles';
+import { Obstacle, MovingObstacle, FallingPlatform } from './../entities/Obstacles';
 
 export class Game extends Scene {
   constructor() {
@@ -40,7 +40,7 @@ export class Game extends Scene {
     const spawnPoint_1 = findObjectByName(mapN1, "objects", "player_1");
 
     // Crear los jugadores usando las coordenadas del spawn point
-    this.player1 = this.physics.add.sprite(spawnPoint_1.x, spawnPoint_1.y, "player1");
+    this.player1 = this.physics.add.sprite(spawnPoint_1.x, spawnPoint_1.y, "player1"); // spawnPoint_1.x, spawnPoint_1.y,
     this.player2 = this.physics.add.sprite(spawnPoint_1.x, spawnPoint_1.y, "player2");
 
     // Configurar propiedades y colisiones para los jugadores
@@ -92,91 +92,33 @@ export class Game extends Scene {
     this.obstacle2.body.setAllowGravity(false);
     this.physics.add.collider(this.player1, this.obstacle2);
     this.physics.add.collider(this.player2, this.obstacle2);
-    /* // Crear la plataforma
-    this.platform = this.physics.add.sprite(400, 650, "platform_move");
-
-    // Establecer los límites de movimiento
-    this.platform.body.setAllowGravity(false);
-    this.platform.body.setImmovable(true);
-    this.platform.minX = 550;
-    this.platform.maxX = 800;
-
-    // Establecer la velocidad de movimiento
-    this.platform.speed = 100;
-
-    // Inicializar la dirección del movimiento
-    this.platform.body.velocity.x = this.platform.speed;
-
-    this.physics.add.collider(this.player1, this.platform);
-    this.physics.add.collider(this.player2, this.platform);
-
-    // Crear la plataforma
-    this.platform2 = this.physics.add.sprite(700, 350, "platform_move");
-
-    // Establecer los límites de movimiento
-    this.platform2.body.setAllowGravity(false);
-    this.platform2.body.setImmovable(true);
-    this.platform2.minX = 700;
-    this.platform2.maxX = 900;
-
-    // Establecer la velocidad de movimiento
-    this.platform2.speed = 100;
-
-    // Inicializar la dirección del movimiento
-    this.platform2.body.velocity.x = this.platform2.speed;
-
-    this.physics.add.collider(this.player1, this.platform2);
-    this.physics.add.collider(this.player2, this.platform2); */
-
-    // Crear la plataforma
-    this.platform3 = this.physics.add.sprite(1050, 260, "platform_move");
-
-    // Establecer los límites de movimiento
+  
+     // Crear la plataforma
+     this.platform3 = new FallingPlatform(this, 1050, 260, 'platform_move'); // 1050, 260;
     this.platform3.body.setAllowGravity(false);
-    this.platform3.body.setImmovable(true);
-
     // Añadir el collider entre el jugador y la plataforma
     this.physics.add.collider(
-      this.player1,
-      this.platform3,
-      this.handlePlatformCollision,
-      null,
-      this
+      this.player1, 
+      this.platform3, 
+      () => {
+        this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
+      },
     );
     this.physics.add.collider(
-      this.player2,
-      this.platform3,
-      this.handlePlatformCollision,
-      null,
-      this
+      this.player2, 
+      this.platform3, 
+      () => {
+        this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
+      },
     );
 
     // Crear la plataforma
-    this.platform4 = this.physics.add.sprite(1200, 260, "platform_move");
-
-    // Establecer los límites de movimiento
+    this.platform4 = new Obstacle(this, 1200, 260, "platform_move" );
     this.platform4.body.setAllowGravity(false);
-    this.platform4.body.setImmovable(true);
 
     this.physics.add.collider(this.player1, this.platform4);
     this.physics.add.collider(this.player2, this.platform4);
   }
-
-  // Función para manejar la colisión
-  handlePlatformCollision(player, platform) {
-    // Esperar 5 segundos antes de hacer que la plataforma comience a caer
-    this.time.delayedCall(1000, () => {
-      // Hacer que la plataforma caiga después de 5 segundos
-      platform.body.setAllowGravity(true);
-      platform.body.setImmovable(false);
-
-      // Eliminar la plataforma después de 2 segundos desde que comenzó a caer
-      this.time.delayedCall(2000, () => {
-        platform.destroy(); // Desaparecer la plataforma
-      });
-    });
-  }
-
   update() {
     //move left
     if (this.cursors.left.isDown) {
@@ -219,19 +161,9 @@ export class Game extends Scene {
     if (this.obstacle2 instanceof MovingObstacle) {
       this.obstacle2.update();
     }
-    /* // Invertir la dirección si llega a un límite
-    if (this.platform.x <= this.platform.minX) {
-      this.platform.body.velocity.x = this.platform.speed;
-    } else if (this.platform.x >= this.platform.maxX) {
-      this.platform.body.velocity.x = -this.platform.speed;
-    } */
-
-    // Invertir la dirección si llega a un límite
-    /* if (this.platform2.x <= this.platform2.minX) {
-      this.platform2.body.velocity.x = this.platform2.speed;
-    } else if (this.platform2.x >= this.platform2.maxX) {
-      this.platform2.body.velocity.x = -this.platform2.speed;
-    } */
+    if (this.platform3) {
+      this.platform3.update();
+    }
   }
   updateChain() {
     const offsetY = 15;
