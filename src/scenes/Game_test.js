@@ -1,5 +1,5 @@
 import { Scene } from "phaser";
-import { findObjectByName } from "./../components/TileMapUtil";
+import { addTileset, createTilemapLayer, findObjectByName } from "./../components/TileMapUtil";
 import { FallingPlatform, MovingObstacle } from "./../entities/Obstacles";
 
 export class GameTest extends Scene {
@@ -16,10 +16,9 @@ export class GameTest extends Scene {
   create() {
     // Crear el tilemap
     const map = this.make.tilemap({ key: "map" });
-    const tileset1 = map.addTilesetImage("Tiles", "tiles1");
-
-    const plataform = map.createStaticLayer("plataforma", tileset1);
-
+    const tileset1 = addTileset(map,"Tiles", "tiles1");
+    
+    const plataform = createTilemapLayer(map, "plataforma", tileset1);
     plataform.setCollisionByProperty({ colision: true });
 
     // Encontrar el punto de spawn para el jugador 1 usando la función modularizada
