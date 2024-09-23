@@ -7,7 +7,7 @@ export class Preloader extends Scene {
 
   preload() {
     this.load.tilemapTiledJSON("mapN1", "/src/tilemaps/level3.json");
-    this.load.image("bg", "./assets/bg.png" );
+    this.load.image("bg", "./assets/bg.png");
     this.load.image("hades", "/src/images/fondonuevo.png");
     this.load.image("spikes", "src/images/spikes_1.png");
     this.load.image("rock1", "src/images/rock_1.png");
@@ -17,6 +17,10 @@ export class Preloader extends Scene {
     this.load.image("floor3", "src/images/floor_6.png");
     this.load.image("floor4", "src/images/floor_4.png");
     this.load.image("floor4", "src/images/floor_4.png");
+    this.load.image("platform_move1", "src/images/platform1.png");
+    this.load.image("platform_move2", "src/images/platform2.png");
+    this.load.tilemapTiledJSON("map", "/src/tilemaps/map_test.json");
+    this.load.image("tiles1", "src/images/Tiles.png");
     this.load.image("platform_move", "src/images/platform_move.png");
     this.load.spritesheet("player1", "/src/images/dude.png", {
       frameWidth: 32,
@@ -71,6 +75,6 @@ export class Preloader extends Scene {
     });
 
 
-    this.scene.start("MainMenu");
+    this.scene.start("GameTest");
   }
 }

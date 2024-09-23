@@ -92,3 +92,10 @@ export class MovingObstacle extends Obstacle {
         this.body.enable = true; // Reactivar colisiones
       }
     }
+    export class DissapPlatform extends Obstacle {
+      constructor(scene, x, y, texture) {
+        super(scene, x, y, texture);
+        this.setImmovable(true);
+      }
+      
+   }

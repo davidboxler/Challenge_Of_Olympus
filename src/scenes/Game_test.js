@@ -1,56 +1,52 @@
 import { Scene } from "phaser";
-import { addTileset, createTilemapLayer, findObjectByName } from './../components/TileMapUtil';
-import { FallingPlatform, MovingObstacle, Obstacle } from './../entities/Obstacles';
+import { findObjectByName } from "./../components/TileMapUtil";
+import { FallingPlatform, MovingObstacle } from "./../entities/Obstacles";
 
-export class Game extends Scene {
+export class GameTest extends Scene {
   constructor() {
-    super("Game");
+    super("GameTest");
   }
+
   init() {
     this.segmentLength = 12; // Longitud de cada segmento
     this.segmentCount = 5; // Número de segmentos en la cadena
     this.maxDistance = this.segmentLength * this.segmentCount; // Distancia máxima permitida
   }
+
   create() {
     // Crear el tilemap
-    const mapN1 = this.make.tilemap({ key: "mapN1" });
+    const map = this.make.tilemap({ key: "map" });
+    const tileset1 = map.addTilesetImage("Tiles", "tiles1");
 
-    // Añadir los tilesets usando la función modularizada
-    const background = addTileset(mapN1, "fondonuevo", "hades");
-    const floor1 = addTileset(mapN1, "floor_6", "floor3");
-    const floor2 = addTileset(mapN1, "floor_5", "floor2");
-    const floor3 = addTileset(mapN1, "floor_1", "floor1");
-    const floor4 = addTileset(mapN1, "floor_4", "floor4");
-    const wall = addTileset(mapN1, "wall2", "wall");
-    const rock = addTileset(mapN1, "rock_1", "rock1");
+    const plataform = map.createStaticLayer("plataforma", tileset1);
 
-    // Crear las capas del tilemap
-    const backgroundLayer = createTilemapLayer(mapN1, "background", background);
-    const floor1Layer = createTilemapLayer(mapN1, "floor_1", floor2);
-    const floor2Layer = createTilemapLayer(mapN1, "floor_2", floor1);
-    const floor3Layer = createTilemapLayer(mapN1, "floor_3", floor3);
-    const floor4Layer = createTilemapLayer(mapN1, "floor_4", floor4);
-    const wallLayer = createTilemapLayer(mapN1, "walls", wall);
-    const rockLayer = createTilemapLayer(mapN1, "platform", rock);
-
-    // Configurar colisiones en la capa rockLayer
-    rockLayer.setCollisionByProperty({ colision: true });
+    plataform.setCollisionByProperty({ colision: true });
 
     // Encontrar el punto de spawn para el jugador 1 usando la función modularizada
-    const spawnPoint_1 = findObjectByName(mapN1, "objects", "player_1");
+    const spawnPoint_1 = findObjectByName(map, "objetos", "player1");
 
     // Crear los jugadores usando las coordenadas del spawn point
-    this.player1 = this.physics.add.sprite(spawnPoint_1.x, spawnPoint_1.y, "player1"); // spawnPoint_1.x, spawnPoint_1.y,
-    this.player2 = this.physics.add.sprite(spawnPoint_1.x, spawnPoint_1.y, "player2");
+    this.player1 = this.physics.add.sprite(
+      spawnPoint_1.x,
+      spawnPoint_1.y,
+      "player1"
+    ); // spawnPoint_1.x, spawnPoint_1.y,
+    this.player2 = this.physics.add.sprite(
+      spawnPoint_1.x,
+      spawnPoint_1.y,
+      "player2"
+    );
 
     // Configurar propiedades y colisiones para los jugadores
     this.player1.setBounce(0.1);
     this.player1.setCollideWorldBounds(true);
+    // this.player1.body.setGravityY(500);
     this.player2.setBounce(0.1);
     this.player2.setCollideWorldBounds(true);
+    // this.player2.body.setGravityY(500);
 
-    this.physics.add.collider(this.player1, rockLayer);
-    this.physics.add.collider(this.player2, rockLayer);
+    this.physics.add.collider(this.player1, plataform);
+    this.physics.add.collider(this.player2, plataform);
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.wasdKeys = this.input.keyboard.addKeys({
@@ -74,51 +70,93 @@ export class Game extends Scene {
       this.player2.x,
       this.player2.y
     );
+
     // ----------------------------------- Platform --------------------------
-    this.obstacle = new MovingObstacle(this, 400, 650, "platform_move", {
-      minX: 550,
-      maxX: 800,
-      speed: 100
+    this.obstacle = new MovingObstacle(this, 1600, 1630, "platform_move1", {
+      minX: 1600,
+      maxX: 2000,
+      speed: 100,
     });
     this.obstacle.body.setAllowGravity(false);
     this.physics.add.collider(this.player1, this.obstacle);
     this.physics.add.collider(this.player2, this.obstacle);
 
-    this.obstacle2 = new MovingObstacle(this, 700, 350, "platform_move", {
-      minX: 700,
-      maxX: 850,
-      speed: 100
+    // Crear la plataforma
+    this.platform3 = new FallingPlatform(this, 1675, 1420, "platform_move2"); // 1050, 260; 700
+    this.platform3.body.setAllowGravity(false);
+    // Añadir el collider entre el jugador y la plataforma
+    this.physics.add.collider(this.player1, this.platform3, () => {
+      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
+    });
+    this.physics.add.collider(this.player2, this.platform3, () => {
+      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
+    });
+
+    // Crear la plataforma
+    this.platform3 = new FallingPlatform(this, 310, 1080, "platform_move2"); // 1050, 260; 700
+    this.platform3.body.setAllowGravity(false);
+    // Añadir el collider entre el jugador y la plataforma
+    this.physics.add.collider(this.player1, this.platform3, () => {
+      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
+    });
+    this.physics.add.collider(this.player2, this.platform3, () => {
+      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
+    });
+
+    // Crear la plataforma
+    this.platform3 = new FallingPlatform(this, 540, 1175, "platform_move2"); // 1050, 260; 700
+    this.platform3.body.setAllowGravity(false);
+    // Añadir el collider entre el jugador y la plataforma
+    this.physics.add.collider(this.player1, this.platform3, () => {
+      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
+    });
+    this.physics.add.collider(this.player2, this.platform3, () => {
+      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
+    });
+
+    // Crear la plataforma
+    this.platform3 = new FallingPlatform(this, 770, 1270, "platform_move2"); // 1050, 260; 700
+    this.platform3.body.setAllowGravity(false);
+    // Añadir el collider entre el jugador y la plataforma
+    this.physics.add.collider(this.player1, this.platform3, () => {
+      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
+    });
+    this.physics.add.collider(this.player2, this.platform3, () => {
+      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
+    });
+
+    // Crear la plataforma
+    this.platform3 = new FallingPlatform(this, 310, 890, "platform_move2"); // 1050, 260; 700
+    this.platform3.body.setAllowGravity(false);
+    // Añadir el collider entre el jugador y la plataforma
+    this.physics.add.collider(this.player1, this.platform3, () => {
+      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
+    });
+    this.physics.add.collider(this.player2, this.platform3, () => {
+      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
+    });
+
+    // Crear la plataforma
+    this.platform3 = new FallingPlatform(this, 1370, 240, "platform_move2"); // 1050, 260; 700
+    this.platform3.body.setAllowGravity(false);
+    // Añadir el collider entre el jugador y la plataforma
+    this.physics.add.collider(this.player1, this.platform3, () => {
+      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
+    });
+    this.physics.add.collider(this.player2, this.platform3, () => {
+      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
+    });
+
+    this.obstacle2 = new MovingObstacle(this, 850, 240, "platform_move1", {
+      minX: 850,
+      maxX: 1150,
+      speed: 100,
     });
     this.obstacle2.body.setAllowGravity(false);
     this.physics.add.collider(this.player1, this.obstacle2);
     this.physics.add.collider(this.player2, this.obstacle2);
-  
-     // Crear la plataforma
-     this.platform3 = new FallingPlatform(this, 1050, 260, 'platform_move'); // 1050, 260; 700
-    this.platform3.body.setAllowGravity(false);
-    // Añadir el collider entre el jugador y la plataforma
-    this.physics.add.collider(
-      this.player1, 
-      this.platform3, 
-      () => {
-        this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
-      },
-    );
-    this.physics.add.collider(
-      this.player2, 
-      this.platform3, 
-      () => {
-        this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
-      },
-    );
-
-    // Crear la plataforma
-    this.platform4 = new Obstacle(this, 1200, 260, "platform_move" );
-    this.platform4.body.setAllowGravity(false);
-
-    this.physics.add.collider(this.player1, this.platform4);
-    this.physics.add.collider(this.player2, this.platform4);
   }
+
   update() {
     //move left
     if (this.cursors.left.isDown) {
@@ -165,6 +203,7 @@ export class Game extends Scene {
       this.platform3.update();
     }
   }
+
   updateChain() {
     const offsetY = 15;
     // Calcular la distancia actual entre los dos personajes
