@@ -21,6 +21,7 @@ export class Preloader extends Scene {
     this.load.image("platform_move2", "src/images/platform2.png");
     this.load.tilemapTiledJSON("map", "/src/tilemaps/map_test.json");
     this.load.image("tiles1", "src/images/Tiles.png");
+    this.load.image("fondoNuevo", "src/images/fondo.png");
     this.load.image("platform_move", "src/images/platform_move.png");
     this.load.spritesheet("player1", "/src/images/dude.png", {
       frameWidth: 32,

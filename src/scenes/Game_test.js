@@ -1,5 +1,9 @@
 import { Scene } from "phaser";
-import { addTileset, createTilemapLayer, findObjectByName } from "./../components/TileMapUtil";
+import {
+  addTileset,
+  createTilemapLayer,
+  findObjectByName,
+} from "./../components/TileMapUtil";
 import { FallingPlatform, MovingObstacle } from "./../entities/Obstacles";
 
 export class GameTest extends Scene {
@@ -16,9 +20,11 @@ export class GameTest extends Scene {
   create() {
     // Crear el tilemap
     const map = this.make.tilemap({ key: "map" });
-    const tileset1 = addTileset(map,"Tiles", "tiles1");
-    
+    const tileset1 = addTileset(map, "Tiles", "tiles1");
+    const tileFondo = addTileset(map, "fondo", "fondoNuevo");
+    const fondoJuego = createTilemapLayer(map, "fondo", tileFondo);
     const plataform = createTilemapLayer(map, "plataforma", tileset1);
+    
     plataform.setCollisionByProperty({ colision: true });
 
     // Encontrar el punto de spawn para el jugador 1 usando la función modularizada
@@ -47,18 +53,18 @@ export class GameTest extends Scene {
     this.physics.add.collider(this.player1, plataform);
     this.physics.add.collider(this.player2, plataform);
 
-// Configurar la cámara para que siga al jugador 1
-this.cameras.main.startFollow(this.player1);
+    // Configurar la cámara para que siga al jugador 1
+    this.cameras.main.startFollow(this.player1);
 
-// Limitar la cámara a los bordes del mapa
-// Establecer los límites de la cámara dentro del tamaño del mapa
-this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    // Limitar la cámara a los bordes del mapa
+    // Establecer los límites de la cámara dentro del tamaño del mapa
+    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
-// Establecer los límites de movimiento del jugador dentro del mapa
-this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-this.player1.setCollideWorldBounds(true);
-this.player2.setCollideWorldBounds(true);
-this.cameras.main.setZoom(2); // Ajusta el zoom según lo necesites
+    // Establecer los límites de movimiento del jugador dentro del mapa
+    this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    this.player1.setCollideWorldBounds(true);
+    this.player2.setCollideWorldBounds(true);
+    this.cameras.main.setZoom(2); // Ajusta el zoom según lo necesites
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.wasdKeys = this.input.keyboard.addKeys({
