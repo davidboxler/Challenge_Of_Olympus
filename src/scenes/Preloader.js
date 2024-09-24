@@ -76,6 +76,6 @@ export class Preloader extends Scene {
     });
 
 
-    this.scene.start("GameTest");
+    this.scene.start("MainMenu");
   }
 }
