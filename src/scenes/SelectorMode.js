@@ -1,10 +1,10 @@
 import { Scene } from 'phaser';
 
-export class ModeSel extends Scene
+export class SelectorMode extends Scene
 {
     constructor ()
     {
-        super('ModeSel');
+        super('SelectorMode');
     }
 
     create ()

@@ -20,11 +20,12 @@ export class GameTest extends Scene {
   create() {
     // Crear el tilemap
     const map = this.make.tilemap({ key: "map" });
-    const tileset1 = addTileset(map, "Tiles", "tiles1");
-    const tileFondo = addTileset(map, "fondo", "fondoNuevo");
+    const tileset1 = addTileset(map, "Tiles", "tilesSet");
+    const tileFondo = addTileset(map, "fondo", "background");
+
     const fondoJuego = createTilemapLayer(map, "fondo", tileFondo);
     const plataform = createTilemapLayer(map, "plataforma", tileset1);
-    
+
     plataform.setCollisionByProperty({ colision: true });
 
     // Encontrar el punto de spawn para el jugador 1 usando la función modularizada
@@ -45,10 +46,9 @@ export class GameTest extends Scene {
     // Configurar propiedades y colisiones para los jugadores
     this.player1.setBounce(0.1);
     this.player1.setCollideWorldBounds(true);
-    // this.player1.body.setGravityY(500);
+
     this.player2.setBounce(0.1);
     this.player2.setCollideWorldBounds(true);
-    // this.player2.body.setGravityY(500);
 
     this.physics.add.collider(this.player1, plataform);
     this.physics.add.collider(this.player2, plataform);
@@ -62,8 +62,6 @@ export class GameTest extends Scene {
 
     // Establecer los límites de movimiento del jugador dentro del mapa
     this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-    this.player1.setCollideWorldBounds(true);
-    this.player2.setCollideWorldBounds(true);
     this.cameras.main.setZoom(2); // Ajusta el zoom según lo necesites
 
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -72,7 +70,8 @@ export class GameTest extends Scene {
       left: Phaser.Input.Keyboard.KeyCodes.A,
       right: Phaser.Input.Keyboard.KeyCodes.D,
     });
-    //----------------------------------------------------------------------Cadena ----------------------------------
+
+    /* --------------------------------- Cadena -------------------------------- */
     // Crear los segmentos de la cadena
     this.segments = [];
     for (let i = 0; i < this.segmentCount; i++) {
@@ -89,90 +88,73 @@ export class GameTest extends Scene {
       this.player2.y
     );
 
-    // ----------------------------------- Platform --------------------------
-    this.obstacle = new MovingObstacle(this, 1600, 1630, "platform_move1", {
+    /* ------------------------- Mobile platforms  -------------------------- */
+    this.platform_mobile1 = new MovingObstacle(this, 1600, 1630, "platform_mobile", {
       minX: 1600,
       maxX: 2000,
       speed: 100,
-    });
-    this.obstacle.body.setAllowGravity(false);
-    this.physics.add.collider(this.player1, this.obstacle);
-    this.physics.add.collider(this.player2, this.obstacle);
+    }, this.player1, this.player2);
 
-    // Crear la plataforma
-    this.platform3 = new FallingPlatform(this, 1675, 1420, "platform_move2"); // 1050, 260; 700
-    this.platform3.body.setAllowGravity(false);
-    // Añadir el collider entre el jugador y la plataforma
-    this.physics.add.collider(this.player1, this.platform3, () => {
-      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
-    });
-    this.physics.add.collider(this.player2, this.platform3, () => {
-      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
-    });
-
-    // Crear la plataforma
-    this.platform3 = new FallingPlatform(this, 310, 1080, "platform_move2"); // 1050, 260; 700
-    this.platform3.body.setAllowGravity(false);
-    // Añadir el collider entre el jugador y la plataforma
-    this.physics.add.collider(this.player1, this.platform3, () => {
-      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
-    });
-    this.physics.add.collider(this.player2, this.platform3, () => {
-      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
-    });
-
-    // Crear la plataforma
-    this.platform3 = new FallingPlatform(this, 540, 1175, "platform_move2"); // 1050, 260; 700
-    this.platform3.body.setAllowGravity(false);
-    // Añadir el collider entre el jugador y la plataforma
-    this.physics.add.collider(this.player1, this.platform3, () => {
-      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
-    });
-    this.physics.add.collider(this.player2, this.platform3, () => {
-      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
-    });
-
-    // Crear la plataforma
-    this.platform3 = new FallingPlatform(this, 770, 1270, "platform_move2"); // 1050, 260; 700
-    this.platform3.body.setAllowGravity(false);
-    // Añadir el collider entre el jugador y la plataforma
-    this.physics.add.collider(this.player1, this.platform3, () => {
-      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
-    });
-    this.physics.add.collider(this.player2, this.platform3, () => {
-      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
-    });
-
-    // Crear la plataforma
-    this.platform3 = new FallingPlatform(this, 310, 890, "platform_move2"); // 1050, 260; 700
-    this.platform3.body.setAllowGravity(false);
-    // Añadir el collider entre el jugador y la plataforma
-    this.physics.add.collider(this.player1, this.platform3, () => {
-      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
-    });
-    this.physics.add.collider(this.player2, this.platform3, () => {
-      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
-    });
-
-    // Crear la plataforma
-    this.platform3 = new FallingPlatform(this, 1370, 240, "platform_move2"); // 1050, 260; 700
-    this.platform3.body.setAllowGravity(false);
-    // Añadir el collider entre el jugador y la plataforma
-    this.physics.add.collider(this.player1, this.platform3, () => {
-      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
-    });
-    this.physics.add.collider(this.player2, this.platform3, () => {
-      this.platform3.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
-    });
-
-    this.obstacle2 = new MovingObstacle(this, 850, 240, "platform_move1", {
+    this.platform_mobile2 = new MovingObstacle(this, 850, 240, "platform_mobile", {
       minX: 850,
       maxX: 1150,
       speed: 100,
-    });
-    this.obstacle2.body.setAllowGravity(false);
-    this.physics.add.collider(this.player1, this.obstacle2);
-    this.physics.add.collider(this.player2, this.obstacle2);
+    }, this.player1, this.player2);
+
+    /* ------------------------- Falling platforms  -------------------------- */
+    this.platform_falling1 = new FallingPlatform(
+      this,
+      1400,
+      190,
+      "platform_falling",
+      this.player1,
+      this.player2
+    );
+
+    this.platform_falling2 = new FallingPlatform(
+      this,
+      1675,
+      1420,
+      "platform_falling",
+      this.player1,
+      this.player2
+    );
+
+    this.platform_falling3 = new FallingPlatform(
+      this,
+      310,
+      1080,
+      "platform_falling",
+      this.player1,
+      this.player2
+    );
+
+    this.platform_falling4 = new FallingPlatform(
+      this,
+      540,
+      1175,
+      "platform_falling",
+      this.player1,
+      this.player2
+    );
+
+    this.platform_falling5 = new FallingPlatform(
+      this,
+      770,
+      1270,
+      "platform_falling",
+      this.player1,
+      this.player2
+    );
+
+    this.platform_falling6 = new FallingPlatform(
+      this,
+      310,
+      890,
+      "platform_falling",
+      this.player1,
+      this.player2
+    );
   }
 
   update() {
@@ -208,17 +190,33 @@ export class GameTest extends Scene {
     if (this.wasdKeys.up.isDown && this.player2.body.blocked.down) {
       this.player2.setVelocityY(-313);
     }
+
     //Funcion cadena
     this.updateChain();
 
-    if (this.obstacle instanceof MovingObstacle) {
-      this.obstacle.update();
+    if (this.platform_mobile1 instanceof MovingObstacle) {
+      this.platform_mobile1.update();
     }
-    if (this.obstacle2 instanceof MovingObstacle) {
-      this.obstacle2.update();
+    if (this.platform_mobile2 instanceof MovingObstacle) {
+      this.platform_mobile2.update();
     }
-    if (this.platform3) {
-      this.platform3.update();
+    if (this.platform_falling1) {
+      this.platform_falling1.update();
+    }
+    if (this.platform_falling2) {
+      this.platform_falling2.update();
+    }
+    if (this.platform_falling3) {
+      this.platform_falling3.update();
+    }
+    if (this.platform_falling4) {
+      this.platform_falling4.update();
+    }
+    if (this.platform_falling5) {
+      this.platform_falling5.update();
+    }
+    if (this.platform_falling6) {
+      this.platform_falling6.update();
     }
   }
 

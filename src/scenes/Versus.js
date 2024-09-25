@@ -25,7 +25,7 @@ export class Versus extends Scene
 
         versusText.on('pointerdown', () => {
 
-            this.scene.start('ModeSel');
+            this.scene.start('SelectorMode');
 
         });
       }

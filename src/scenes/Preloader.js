@@ -6,23 +6,20 @@ export class Preloader extends Scene {
   }
 
   preload() {
-    this.load.tilemapTiledJSON("mapN1", "/src/tilemaps/level3.json");
-    this.load.image("bg", "./assets/bg.png");
-    this.load.image("hades", "/src/images/fondonuevo.png");
-    this.load.image("spikes", "src/images/spikes_1.png");
-    this.load.image("rock1", "src/images/rock_1.png");
-    this.load.image("wall", "src/images/wall2.png");
-    this.load.image("floor1", "src/images/floor_1.png");
-    this.load.image("floor2", "src/images/floor_5.png");
-    this.load.image("floor3", "src/images/floor_6.png");
-    this.load.image("floor4", "src/images/floor_4.png");
-    this.load.image("floor4", "src/images/floor_4.png");
-    this.load.image("platform_move1", "src/images/platform1.png");
-    this.load.image("platform_move2", "src/images/platform2.png");
+    /* ---------- Mapa Videojuego ----------- */
     this.load.tilemapTiledJSON("map", "/src/tilemaps/map_test.json");
-    this.load.image("tiles1", "src/images/Tiles.png");
-    this.load.image("fondoNuevo", "src/images/fondo.png");
-    this.load.image("platform_move", "src/images/platform_move.png");
+
+    /* ---------- Imagen Fondo ----------- */
+    this.load.image("background", "src/images/fondo.png");
+    this.load.image("bg", "/assets/bg.png");
+
+    /* ---------- Imagenes Videojuego ----------- */
+    this.load.image("chain", "src/images/chain.png");
+    this.load.image("platform_mobile", "src/images/platform1.png");
+    this.load.image("platform_falling", "src/images/platform2.png");
+    this.load.image("tilesSet", "src/images/Tiles.png");
+
+    /* ---------- SpriteSheet Jugadores ----------- */
     this.load.spritesheet("player1", "/src/images/dude.png", {
       frameWidth: 32,
       frameHeight: 48,
@@ -31,7 +28,12 @@ export class Preloader extends Scene {
       frameWidth: 32,
       frameHeight: 48,
     });
-    this.load.image("chain", "./src/images/chain.png");
+
+    /* ---------- Imagenes Botones Videojuego ----------- */
+    /* ---------- Imagenes Instrucciones ----------- */
+    /* ---------- AUudios Videojuego ----------- */
+    /* ---------- Imagenes Finales Videojuego ----------- */
+    /* --------------- Cinematicas ------------------- */
   }
 
   create() {
@@ -74,7 +76,6 @@ export class Preloader extends Scene {
       frameRate: 10,
       repeat: -1,
     });
-
 
     this.scene.start("MainMenu");
   }
