@@ -7,7 +7,7 @@ export class Preloader extends Scene {
 
   preload() {
     /* ---------- Mapa Videojuego ----------- */
-    this.load.tilemapTiledJSON("map", "./assets/tilemaps/map_test.json");
+    this.load.tilemapTiledJSON("map", "./assets/map_test.json");
 
     /* ---------- Imagen Fondo ----------- */
     this.load.image("background", "./assets/images/fondo.png");
