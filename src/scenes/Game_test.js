@@ -22,7 +22,7 @@ export class GameTest extends Scene {
     const map = this.make.tilemap({ key: "map" });
     const tileset1 = addTileset(map, "Tiles", "tilesSet");
     const tileFondo = addTileset(map, "fondo", "background");
-
+    console.log(map)
     const fondoJuego = createTilemapLayer(map, "fondo", tileFondo);
     const plataform = createTilemapLayer(map, "plataforma", tileset1);
 
