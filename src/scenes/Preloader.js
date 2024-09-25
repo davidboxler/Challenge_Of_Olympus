@@ -7,24 +7,24 @@ export class Preloader extends Scene {
 
   preload() {
     /* ---------- Mapa Videojuego ----------- */
-    this.load.tilemapTiledJSON("map", "/src/tilemaps/map_test.json");
+    this.load.tilemapTiledJSON("map", "./src/tilemaps/map_test.json");
 
     /* ---------- Imagen Fondo ----------- */
-    this.load.image("background", "src/images/fondo.png");
-    this.load.image("bg", "/assets/bg.png");
+    this.load.image("background", "./src/images/fondo.png");
+    this.load.image("bg", "./assets/bg.png");
 
     /* ---------- Imagenes Videojuego ----------- */
-    this.load.image("chain", "src/images/chain.png");
-    this.load.image("platform_mobile", "src/images/platform1.png");
-    this.load.image("platform_falling", "src/images/platform2.png");
-    this.load.image("tilesSet", "src/images/Tiles.png");
+    this.load.image("chain", "./src/images/chain.png");
+    this.load.image("platform_mobile", "./src/images/platform1.png");
+    this.load.image("platform_falling", "./src/images/platform2.png");
+    this.load.image("tilesSet", "./src/images/Tiles.png");
 
     /* ---------- SpriteSheet Jugadores ----------- */
-    this.load.spritesheet("player1", "/src/images/dude.png", {
+    this.load.spritesheet("player1", "./src/images/dude.png", {
       frameWidth: 32,
       frameHeight: 48,
     });
-    this.load.spritesheet("player2", "/src/images/dude.png", {
+    this.load.spritesheet("player2", "./src/images/dude.png", {
       frameWidth: 32,
       frameHeight: 48,
     });
