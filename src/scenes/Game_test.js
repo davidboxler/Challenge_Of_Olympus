@@ -64,7 +64,7 @@ export class GameTest extends Scene {
     this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.player1.setCollideWorldBounds(true);
     this.player2.setCollideWorldBounds(true);
-    this.cameras.main.setZoom(2); // Ajusta el zoom según lo necesites
+    this.cameras.main.setZoom(2.5); // Ajusta el zoom según lo necesites
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.wasdKeys = this.input.keyboard.addKeys({
