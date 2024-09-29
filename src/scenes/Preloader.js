@@ -12,11 +12,13 @@ export class Preloader extends Scene {
     /* ---------- Imagen Fondo ----------- */
     this.load.image("background", "./assets/images/fondo.png");
     this.load.image("bg", "./assets/bg.png");
+    this.load.image("tilePl", "./assets/images/platformTiled.png")
 
     /* ---------- Imagenes Videojuego ----------- */
     this.load.image("chain", "./assets/images/chain.png");
     this.load.image("platform_mobile", "./assets/images/platform1.png");
     this.load.image("platform_falling", "./assets/images/platform2.png");
+    this.load.image("plat3", "./assets/images/plat3.png");
     this.load.image("tilesSet", "./assets/images/Tiles.png");
 
     /* ---------- SpriteSheet Jugadores ----------- */
@@ -77,6 +79,6 @@ export class Preloader extends Scene {
       repeat: -1,
     });
 
-    this.scene.start("MainMenu");
+    this.scene.start("GameCapas");
   }
 }

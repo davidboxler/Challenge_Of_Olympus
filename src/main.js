@@ -5,6 +5,7 @@ import { Options } from "./scenes/Options";
 import { Preloader } from "./scenes/Preloader";
 import { SelectorMode } from "./scenes/SelectorMode";
 import { Versus } from "./scenes/Versus";
+import { GameCapas } from "./scenes/Game_capas";
 
 //  Find out more information about the Game Config at:
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
@@ -22,10 +23,10 @@ const config = {
     default: "arcade",
     arcade: {
       gravity: { y: 350 },
-      debug: false,
+      debug: true,
     },
   },
-  scene: [Preloader, MainMenu, Options, SelectorMode, GameTest, Versus, Credits],
+  scene: [Preloader, MainMenu, Options, SelectorMode, GameTest, Versus, Credits, GameCapas],
 };
 
 export default new Phaser.Game(config);

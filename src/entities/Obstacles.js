@@ -7,17 +7,15 @@ export class Obstacle extends Phaser.Physics.Arcade.Sprite {
 
     // Configuración del obstáculo
     this.setOrigin(0.5, 0.5);
-    this.setImmovable(options.immovable || true);
+    this.setImmovable(true);
     this.setAlpha(options.alpha || 1);
     this.setScale(options.scale || 1);
+    this.body.setAllowGravity(false);
 
     // Configuración física
     if (options.physics) {
       this.body.setSize(options.width || this.width, options.height || this.height);
       this.body.setOffset(options.offsetX || 0, options.offsetY || 0);
-      if (options.allowGravity !== undefined) {
-        this.body.setAllowGravity(options.allowGravity);
-      }
       if (options.velocity) {
         this.body.setVelocity(options.velocity.x || 0, options.velocity.y || 0);
       }
