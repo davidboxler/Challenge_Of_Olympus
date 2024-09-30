@@ -10,7 +10,7 @@ export class GameCapas extends Scene {
     create() {
    const fondo = this.add.image(1280, 960, "background");
    //const platf = this.physics.add.sprite(1280, 960, "tilePl" )
-   const platEjemplo = new Obstacle (this,300, 250, "plat3")
+   const platEjemplo = new Obstacle (this,300, 250, "plat1")
    console.log(fondo);
     }
     update(){
