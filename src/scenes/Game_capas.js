@@ -1,11 +1,21 @@
 import { Scene } from "phaser";
-import { FallingPlatform, MovingObstacle, Obstacle } from "./../entities/Obstacles";
+import { findObjectByName } from "../components/TileMapUtil";
+import {
+  FallingPlatform,
+  MovingObstacle,
+  Obstacle,
+} from "./../entities/Obstacles";
 export class GameCapas extends Scene {
   constructor() {
     super("GameCapas");
   }
-  init() {}
+  init() {
+    this.segmentLength = 12; // Longitud de cada segmento
+    this.segmentCount = 5; // Número de segmentos en la cadena
+    this.maxDistance = this.segmentLength * this.segmentCount; // Distancia máxima permitida
+  }
   create() {
+    const map = this.make.tilemap({ key: "map" });
     const fondo = this.add.image(0, 0, "background");
     fondo.setOrigin(0, 0);
     fondo.setDisplaySize(this.scale.width, this.scale.height);
@@ -54,9 +64,33 @@ export class GameCapas extends Scene {
     const platformBasic_39 = new Obstacle(this, 2070, 210, "plat4");
     const platformBasic_40 = new Obstacle(this, 2270, 110, "plat4");
 
+    // Encontrar el punto de spawn para el jugador 1 usando la función modularizada
+    const spawnPoint_1 = findObjectByName(map, "objetos", "player1");
+
     // Crear los jugadores usando las coordenadas del spawn point
-    this.player1 = this.physics.add.sprite(1280, 1920, "player1");
-    this.player2 = this.physics.add.sprite(1300, 1920, "player2");
+    this.player1 = this.physics.add.sprite(2158, 1824, "player1"); // spawnPoint_1.x, spawnPoint_1.y,
+    this.player2 = this.physics.add.sprite(2084, 1826, "player2");
+
+    // Configurar propiedades y colisiones para los jugadores
+    this.player1.setBounce(0.1);
+    this.player1.setCollideWorldBounds(true);
+
+    this.player2.setBounce(0.1);
+    this.player2.setCollideWorldBounds(true);
+
+    this.physics.add.collider(this.player1, backFondo);
+    this.physics.add.collider(this.player2, backFondo);
+
+    // Configurar la cámara para que siga al jugador 1
+    this.cameras.main.startFollow(this.player1);
+
+    // Limitar la cámara a los bordes del mapa
+    // Establecer los límites de la cámara dentro del tamaño del mapa
+    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+
+    // Establecer los límites de movimiento del jugador dentro del mapa
+    this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    this.cameras.main.setZoom(2); // Ajusta el zoom según lo necesites
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.wasdKeys = this.input.keyboard.addKeys({
@@ -157,7 +191,7 @@ export class GameCapas extends Scene {
       this.player2
     );
 
-      this.platform_falling6 = new FallingPlatform(
+    this.platform_falling6 = new FallingPlatform(
       this,
       1400,
       190,
