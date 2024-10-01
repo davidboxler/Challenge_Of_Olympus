@@ -11,13 +11,26 @@ export class Preloader extends Scene {
 
     /* ---------- Imagen Fondo ----------- */
     this.load.image("background", "./assets/images/fondo.png");
+    this.load.image("back_piso", "./assets/images/back_piso.png");
     this.load.image("bg", "./assets/bg.png");
+    this.load.image("bg2", "./assets/images/background.png" );
+    this.load.image("tilePl", "./assets/images/platformTiled.png");
+    this.load.image("MainMenuTheme", "./assets/images/MainMenuTheme.png")
 
     /* ---------- Imagenes Videojuego ----------- */
     this.load.image("chain", "./assets/images/chain.png");
     this.load.image("platform_mobile", "./assets/images/platform1.png");
     this.load.image("platform_falling", "./assets/images/platform2.png");
+    this.load.image("plat1", "./assets/images/plat1.png");
+    this.load.image("plat_limite", "./assets/images/plat_limite.png");
+    this.load.image("plat_alta", "./assets/images/plat_alta.png");
+    this.load.image("plat_centro", "./assets/images/plat_centro.png");
+    this.load.image("plat_esc", "./assets/images/plat_esc.png");
+    this.load.image("plat_cuad", "./assets/images/plat_cuad.png");
+    this.load.image("plat_larga", "./assets/images/plat_larga.png");
+    this.load.image("plat4", "./assets/images/plat4.png");
     this.load.image("tilesSet", "./assets/images/Tiles.png");
+    this.load.image("warrior", "./assets/images/warrior.png");
 
     /* ---------- SpriteSheet Jugadores ----------- */
     this.load.spritesheet("player1", "./assets/images/dude.png", {

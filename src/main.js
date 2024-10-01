@@ -1,4 +1,5 @@
 import { Credits } from "./scenes/Credits";
+import { GameCapas } from "./scenes/Game_capas";
 import { GameTest } from './scenes/Game_test';
 import { MainMenu } from "./scenes/MainMenu";
 import { Options } from "./scenes/Options";
@@ -25,7 +26,7 @@ const config = {
       debug: false,
     },
   },
-  scene: [Preloader, MainMenu, Options, SelectorMode, GameTest, Versus, Credits],
+  scene: [Preloader, MainMenu, Options, SelectorMode, GameTest, Versus, Credits, GameCapas],
 };
 
 export default new Phaser.Game(config);
