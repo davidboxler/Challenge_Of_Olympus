@@ -13,6 +13,7 @@ export class Preloader extends Scene {
     this.load.image("background", "./assets/images/fondo.png");
     this.load.image("back_piso", "./assets/images/back_piso.png");
     this.load.image("bg", "./assets/bg.png");
+    this.load.image("bg2", "./assets/images/background.png" );
     this.load.image("tilePl", "./assets/images/platformTiled.png");
     this.load.image("MainMenuTheme", "./assets/images/MainMenuTheme.png")
 
@@ -29,6 +30,7 @@ export class Preloader extends Scene {
     this.load.image("plat_larga", "./assets/images/plat_larga.png");
     this.load.image("plat4", "./assets/images/plat4.png");
     this.load.image("tilesSet", "./assets/images/Tiles.png");
+    this.load.image("warrior", "./assets/images/warrior.png");
 
     /* ---------- SpriteSheet Jugadores ----------- */
     this.load.spritesheet("player1", "./assets/images/dude.png", {
