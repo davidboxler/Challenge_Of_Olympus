@@ -9,7 +9,7 @@ export class Versus extends Scene {
     // Crear al stickman warrior
     this.add.image(400, 630, "warrior").setScale(0.8);
 
-    const fondo = this.add.image(0, 0, "bg2");
+    const fondo = this.add.image(0, 20, "bg2");
     fondo.setOrigin(0, 0);
     fondo.setDisplaySize(this.scale.width, this.scale.height);
 
