@@ -1,0 +1,41 @@
+{
+	"textures": [
+		{
+			"image": "fondonuevo.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 1578,
+				"h": 889
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "fondo1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 1576,
+						"h": 887
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 1576,
+						"h": 887
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 1576,
+						"h": 887
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:dcdb6bc9f21d078f39dd8f4282aff5cf:40c41d9889057e1e07d79e929e7d9de1:f2147c6df707a1ec605984acb806b34d$"
+	}
+}
