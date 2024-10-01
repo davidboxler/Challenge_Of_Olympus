@@ -6,9 +6,8 @@ export class Options extends Scene {
     }
 
     create() {
-        this.add.image(1250, 950, 'bg')
-        const gameText = this.add.text(1250, 1150, 'Volver', {
-            fontFamily: 'Arial Black', fontSize: 70, color: '#ffffff',
+        const gameText = this.add.text(750, 650, 'Volver', {
+            fontFamily: 'Arial Black', fontSize: 50, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5).setInteractive();
@@ -18,14 +17,14 @@ export class Options extends Scene {
             this.scene.start('MainMenu');
 
         });
-        /* this.add.text(1250, 650, 'Idioma', {
-            fontFamily: 'Arial Black', fontSize: 70, color: '#ffffff',
+        this.add.text(750, 250, 'Idioma', {
+            fontFamily: 'Arial Black', fontSize: 40, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
-        }).setOrigin(0.5); */
+        }).setOrigin(0.5);
 
-        this.add.text(1250, 750, 'Sfx', {
-            fontFamily: 'Arial Black', fontSize: 70, color: '#ffffff',
+        this.add.text(750, 350, 'Sfx', {
+            fontFamily: 'Arial Black', fontSize: 40, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5);
