@@ -9,10 +9,10 @@ export class MainMenu extends Scene
 
     create ()
     {
-        this.add.image(800, 300, 'bg').setScale(4);
+        this.add.image(1250, 1000, 'MainMenuTheme');
 
 
-        const gameText = this.add.text(1250, 350, 'Play', {
+        const gameText = this.add.text(1250, 855, 'Play', {
             fontFamily: 'Arial Black', fontSize: 78, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
@@ -20,10 +20,10 @@ export class MainMenu extends Scene
 
         gameText.on('pointerdown', () => {
 
-            this.scene.start('GameTest');
+            this.scene.start('GameCapas');
 
         });
-        const optText = this.add.text(1250, 600, 'Options', {
+        const optText = this.add.text(1250, 1000, 'Options', {
             fontFamily: 'Arial Black', fontSize: 78, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
@@ -31,18 +31,7 @@ export class MainMenu extends Scene
 
         optText.on('pointerdown', () => {
 
-            this.scene.start('Options');
-
-        });
-        const CredText = this.add.text(1250, 900, 'Creditos', {
-            fontFamily: 'Arial Black', fontSize: 78, color: '#ffffff',
-            stroke: '#000000', strokeThickness: 8,
-            align: 'center'
-        }).setOrigin(0.5).setInteractive();
-
-        CredText.on('pointerdown', () => {
-
-           // this.scene.start('Credits');
+            this.scene.launch('Options');
 
         });
     }

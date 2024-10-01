@@ -6,8 +6,8 @@ export class Options extends Scene {
     }
 
     create() {
-        this.add.image(800, 300, 'bg').setScale(4);
-        const gameText = this.add.text(1250, 1050, 'Volver', {
+        this.add.image(1250, 950, 'bg')
+        const gameText = this.add.text(1250, 1150, 'Volver', {
             fontFamily: 'Arial Black', fontSize: 70, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'

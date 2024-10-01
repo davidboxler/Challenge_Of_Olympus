@@ -13,7 +13,8 @@ export class Preloader extends Scene {
     this.load.image("background", "./assets/images/fondo.png");
     this.load.image("back_piso", "./assets/images/back_piso.png");
     this.load.image("bg", "./assets/bg.png");
-    this.load.image("tilePl", "./assets/images/platformTiled.png")
+    this.load.image("tilePl", "./assets/images/platformTiled.png");
+    this.load.image("MainMenuTheme", "./assets/images/MainMenuTheme.png")
 
     /* ---------- Imagenes Videojuego ----------- */
     this.load.image("chain", "./assets/images/chain.png");
@@ -87,6 +88,6 @@ export class Preloader extends Scene {
       repeat: -1,
     });
 
-    this.scene.start("GameCapas");
+    this.scene.start("MainMenu");
   }
 }
