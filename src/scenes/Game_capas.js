@@ -23,7 +23,7 @@ export class GameCapas extends Scene {
     const backFondo = new Obstacle(this, 1280, 1910, "back_piso");
     const platCentro = new Obstacle(this, 1600, 1872, "plat_centro");
     const platLimite = new Obstacle(this, 190, 1641, "plat_limite");
-    const platformBasic_1 = new Obstacle(this, 1920, 1770, "plat4");
+    const platformBasic_1 = new Obstacle(this, 1920, 1750, "plat4");
     const platformBasic_2 = new Obstacle(this, 1420, 1500, "plat4");
     const platformBasic_3 = new Obstacle(this, 1220, 1400, "plat4");
     const platformBasic_4 = new Obstacle(this, 1050, 1325, "plat_cuad");
@@ -78,8 +78,95 @@ export class GameCapas extends Scene {
     this.player2.setBounce(0.1);
     this.player2.setCollideWorldBounds(true);
 
+    // Crear colisiones entre player1 y todas las plataformas
     this.physics.add.collider(this.player1, backFondo);
+    this.physics.add.collider(this.player1, platCentro);
+    this.physics.add.collider(this.player1, platLimite);
+    this.physics.add.collider(this.player1, platformBasic_1);
+    this.physics.add.collider(this.player1, platformBasic_2);
+    this.physics.add.collider(this.player1, platformBasic_3);
+    this.physics.add.collider(this.player1, platformBasic_4);
+    this.physics.add.collider(this.player1, platformBasic_5);
+    this.physics.add.collider(this.player1, platformBasic_6);
+    this.physics.add.collider(this.player1, platformBasic_7);
+    this.physics.add.collider(this.player1, platformBasic_8);
+    this.physics.add.collider(this.player1, platformBasic_9);
+    this.physics.add.collider(this.player1, platformBasic_10);
+    this.physics.add.collider(this.player1, platformBasic_11);
+    this.physics.add.collider(this.player1, platformBasic_12);
+    this.physics.add.collider(this.player1, platformBasic_13);
+    this.physics.add.collider(this.player1, platformBasic_14);
+    this.physics.add.collider(this.player1, platformBasic_15);
+    this.physics.add.collider(this.player1, platformBasic_16);
+    this.physics.add.collider(this.player1, platformBasic_17);
+    this.physics.add.collider(this.player1, platformBasic_18);
+    this.physics.add.collider(this.player1, platformBasic_19);
+    this.physics.add.collider(this.player1, platformBasic_20);
+    this.physics.add.collider(this.player1, platformBasic_21);
+    this.physics.add.collider(this.player1, platformBasic_22);
+    this.physics.add.collider(this.player1, platformBasic_23);
+    this.physics.add.collider(this.player1, platformBasic_24);
+    this.physics.add.collider(this.player1, platformBasic_25);
+    this.physics.add.collider(this.player1, platformBasic_26);
+    this.physics.add.collider(this.player1, platformBasic_27);
+    this.physics.add.collider(this.player1, platformBasic_28);
+    this.physics.add.collider(this.player1, platformBasic_29);
+    this.physics.add.collider(this.player1, platformBasic_30);
+    this.physics.add.collider(this.player1, platformBasic_31);
+    this.physics.add.collider(this.player1, platformBasic_32);
+    this.physics.add.collider(this.player1, platformBasic_33);
+    this.physics.add.collider(this.player1, platformBasic_34);
+    this.physics.add.collider(this.player1, platformBasic_35);
+    this.physics.add.collider(this.player1, platformBasic_36);
+    this.physics.add.collider(this.player1, platformBasic_37);
+    this.physics.add.collider(this.player1, platformBasic_38);
+    this.physics.add.collider(this.player1, platformBasic_39);
+    this.physics.add.collider(this.player1, platformBasic_40);
+
+    // Crear colisiones entre player2 y todas las plataformas
     this.physics.add.collider(this.player2, backFondo);
+    this.physics.add.collider(this.player2, platCentro);
+    this.physics.add.collider(this.player2, platLimite);
+    this.physics.add.collider(this.player2, platformBasic_1);
+    this.physics.add.collider(this.player2, platformBasic_2);
+    this.physics.add.collider(this.player2, platformBasic_3);
+    this.physics.add.collider(this.player2, platformBasic_4);
+    this.physics.add.collider(this.player2, platformBasic_5);
+    this.physics.add.collider(this.player2, platformBasic_6);
+    this.physics.add.collider(this.player2, platformBasic_7);
+    this.physics.add.collider(this.player2, platformBasic_8);
+    this.physics.add.collider(this.player2, platformBasic_9);
+    this.physics.add.collider(this.player2, platformBasic_10);
+    this.physics.add.collider(this.player2, platformBasic_11);
+    this.physics.add.collider(this.player2, platformBasic_12);
+    this.physics.add.collider(this.player2, platformBasic_13);
+    this.physics.add.collider(this.player2, platformBasic_14);
+    this.physics.add.collider(this.player2, platformBasic_15);
+    this.physics.add.collider(this.player2, platformBasic_16);
+    this.physics.add.collider(this.player2, platformBasic_17);
+    this.physics.add.collider(this.player2, platformBasic_18);
+    this.physics.add.collider(this.player2, platformBasic_19);
+    this.physics.add.collider(this.player2, platformBasic_20);
+    this.physics.add.collider(this.player2, platformBasic_21);
+    this.physics.add.collider(this.player2, platformBasic_22);
+    this.physics.add.collider(this.player2, platformBasic_23);
+    this.physics.add.collider(this.player2, platformBasic_24);
+    this.physics.add.collider(this.player2, platformBasic_25);
+    this.physics.add.collider(this.player2, platformBasic_26);
+    this.physics.add.collider(this.player2, platformBasic_27);
+    this.physics.add.collider(this.player2, platformBasic_28);
+    this.physics.add.collider(this.player2, platformBasic_29);
+    this.physics.add.collider(this.player2, platformBasic_30);
+    this.physics.add.collider(this.player2, platformBasic_31);
+    this.physics.add.collider(this.player2, platformBasic_32);
+    this.physics.add.collider(this.player2, platformBasic_33);
+    this.physics.add.collider(this.player2, platformBasic_34);
+    this.physics.add.collider(this.player2, platformBasic_35);
+    this.physics.add.collider(this.player2, platformBasic_36);
+    this.physics.add.collider(this.player2, platformBasic_37);
+    this.physics.add.collider(this.player2, platformBasic_38);
+    this.physics.add.collider(this.player2, platformBasic_39);
+    this.physics.add.collider(this.player2, platformBasic_40);
 
     // Configurar la cámara para que siga al jugador 1
     this.cameras.main.startFollow(this.player1);
@@ -199,6 +286,61 @@ export class GameCapas extends Scene {
       this.player1,
       this.player2
     );
+
+    // Crear un grupo estático para las plataformas
+    // const plataformas = this.physics.add.staticGroup();
+
+    // // Datos de las plataformas
+    // const platformData = [
+    //   { x: 1280, y: 1910, key: "back_piso" },
+    //   { x: 1600, y: 1872, key: "plat_centro" },
+    //   { x: 190, y: 1641, key: "plat_limite" },
+    //   { x: 1920, y: 1770, key: "plat4" },
+    //   { x: 1420, y: 1500, key: "plat4" },
+    //   { x: 1220, y: 1400, key: "plat4" },
+    //   { x: 1050, y: 1325, key: "plat_cuad" },
+    //   { x: 1000, y: 1310, key: "plat_alta" },
+    //   { x: 1900, y: 1340, key: "plat1" },
+    //   { x: 2020, y: 1340, key: "plat1" },
+    //   { x: 2140, y: 1340, key: "plat1" },
+    //   { x: 2140, y: 1295, key: "plat_cuad" },
+    //   { x: 2310, y: 1340, key: "plat4" },
+    //   { x: 2310, y: 1285, key: "plat_alta" },
+    //   { x: 2500, y: 1340, key: "plat1" },
+    //   { x: 130, y: 970, key: "plat1" },
+    //   { x: 580, y: 890, key: "plat4" },
+    //   { x: 800, y: 890, key: "plat4" },
+    //   { x: 800, y: 850, key: "plat_cuad" },
+    //   { x: 1040, y: 860, key: "plat4" },
+    //   { x: 1250, y: 820, key: "plat1" },
+    //   { x: 1350, y: 820, key: "plat1" },
+    //   { x: 1560, y: 860, key: "plat4" },
+    //   { x: 2060, y: 860, key: "plat_larga" },
+    //   { x: 1860, y: 820, key: "plat_cuad" },
+    //   { x: 2360, y: 770, key: "plat4" },
+    //   { x: 2160, y: 670, key: "plat4" },
+    //   { x: 1960, y: 570, key: "plat4" },
+    //   { x: 1660, y: 570, key: "plat4" },
+    //   { x: 1575, y: 545, key: "plat1" },
+    //   { x: 1490, y: 520, key: "plat4" },
+    //   { x: 1375, y: 490, key: "plat4" },
+    //   { x: 1580, y: 380, key: "plat1" },
+    //   { x: 1680, y: 380, key: "plat1" },
+    //   { x: 1870, y: 310, key: "plat4" },
+    //   { x: 1670, y: 210, key: "plat4" },
+    //   { x: 690, y: 210, key: "plat_cuad" },
+    //   { x: 530, y: 210, key: "plat_cuad" },
+    //   { x: 370, y: 210, key: "plat_cuad" },
+    //   { x: 180, y: 210, key: "plat4" },
+    //   { x: 370, y: 600, key: "plat_larga" },
+    //   { x: 2070, y: 210, key: "plat4" },
+    //   { x: 2270, y: 110, key: "plat4" },
+    // ];
+
+    // // Agregar cada plataforma del array al grupo
+    // platformData.forEach((platform) => {
+    //   plataformas.add(new Obstacle(this, platform.x, platform.y, platform.key));
+    // });
   }
 
   update() {
