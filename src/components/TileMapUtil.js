@@ -1,5 +1,10 @@
 // tilemapUtils.js
-
+export function loadTilemap(scene, mapKey, tilesetKey, tilesetImage, layerName) {
+  const map = scene.make.tilemap({ key: mapKey });
+  const tileset = map.addTilesetImage(tilesetKey, tilesetImage);
+  const layer = map.createLayer(layerName, tileset, 0, 0);
+  return { map, layer };
+}
 /**
  * Función para crear y configurar una capa del tilemap.
  * @param {Phaser.Tilemaps.Tilemap} tilemap - El tilemap al que se añadirá la capa.

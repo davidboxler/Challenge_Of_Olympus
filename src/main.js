@@ -1,19 +1,20 @@
-import { Game } from "./scenes/Game";
-import { Versus } from "./scenes/Versus";
 import { Credits } from "./scenes/Credits";
+import { GameCapas } from "./scenes/Game_capas";
+import { GameTest } from './scenes/Game_test';
+import { MainMenu } from "./scenes/MainMenu";
 import { Options } from "./scenes/Options";
 import { Preloader } from "./scenes/Preloader";
-import { ModeSel } from "./scenes/ModeSel";
-import { MainMenu } from "./scenes/MainMenu";
+import { SelectorMode } from "./scenes/SelectorMode";
+import { Versus } from "./scenes/Versus";
 
 //  Find out more information about the Game Config at:
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
 const config = {
   type: Phaser.AUTO,
-  width: 1568,
-  height: 864,
+  width: 2560,
+  height: 1920,
+  pixelArt: true,
   parent: "game-container",
-  backgroundColor: "#028af8",
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
@@ -21,11 +22,11 @@ const config = {
   physics: {
     default: "arcade",
     arcade: {
-      gravity: { y: 400 },
+      gravity: { y: 350 },
       debug: false,
     },
   },
-  scene: [Preloader, MainMenu, Game, Credits, Options, ModeSel, Versus],
+  scene: [Preloader, MainMenu, Options, SelectorMode, GameTest, Versus, Credits, GameCapas],
 };
 
 export default new Phaser.Game(config);

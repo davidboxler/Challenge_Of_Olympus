@@ -7,17 +7,15 @@ export class Obstacle extends Phaser.Physics.Arcade.Sprite {
 
     // Configuración del obstáculo
     this.setOrigin(0.5, 0.5);
-    this.setImmovable(options.immovable || true);
+    this.setImmovable(true);
     this.setAlpha(options.alpha || 1);
     this.setScale(options.scale || 1);
+    this.body.setAllowGravity(false);
 
     // Configuración física
     if (options.physics) {
       this.body.setSize(options.width || this.width, options.height || this.height);
       this.body.setOffset(options.offsetX || 0, options.offsetY || 0);
-      if (options.allowGravity !== undefined) {
-        this.body.setAllowGravity(options.allowGravity);
-      }
       if (options.velocity) {
         this.body.setVelocity(options.velocity.x || 0, options.velocity.y || 0);
       }
@@ -26,7 +24,7 @@ export class Obstacle extends Phaser.Physics.Arcade.Sprite {
 }
 
 export class MovingObstacle extends Obstacle {
-  constructor(scene, x, y, texture, options = {}) {
+  constructor(scene, x, y, texture, options = {}, player1, player2) {
     super(scene, x, y, texture, options);
 
     this.minX = options.minX || x;
@@ -35,6 +33,10 @@ export class MovingObstacle extends Obstacle {
 
     this.body.setVelocityX(this.speed);
     this.direction = 1; // 1 for right, -1 for left
+
+    this.body.setAllowGravity(false);
+    scene.physics.add.collider(player1, this)
+    scene.physics.add.collider(player2, this)
   }
 
 
@@ -55,11 +57,20 @@ export class MovingObstacle extends Obstacle {
     this.fallDuration = options.fallDuration || 2000; // Tiempo hasta que desaparece la plataforma
   } */
     export class FallingPlatform extends Obstacle {
-      constructor(scene, x, y, texture) {
+      constructor(scene, x, y, texture, player1, player2) {
         super(scene, x, y, texture);
         this.originalX = x; // Guardar la posición original
         this.originalY = y;
         this.setImmovable(true);
+
+        this.body.setAllowGravity(false);
+        // Añadir el collider entre el jugador y la plataforma
+        scene.physics.add.collider(player1, this, () => {
+          this.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
+        });
+        scene.physics.add.collider(player2, this, () => {
+          this.fallAndRespawn(1000, 2000); // 1 segundo para caer, reaparece en 3 segundos
+        });
       }
     
       // Función para hacer que la plataforma caiga y reaparezca
@@ -92,3 +103,10 @@ export class MovingObstacle extends Obstacle {
         this.body.enable = true; // Reactivar colisiones
       }
     }
+    export class DissapPlatform extends Obstacle {
+      constructor(scene, x, y, texture) {
+        super(scene, x, y, texture);
+        this.setImmovable(true);
+      }
+      
+   }

@@ -6,27 +6,47 @@ export class Preloader extends Scene {
   }
 
   preload() {
-    this.load.tilemapTiledJSON("mapN1", "/src/tilemaps/level3.json");
-    this.load.image("bg", "./assets/bg.png" );
-    this.load.image("hades", "/src/images/fondonuevo.png");
-    this.load.image("spikes", "src/images/spikes_1.png");
-    this.load.image("rock1", "src/images/rock_1.png");
-    this.load.image("wall", "src/images/wall2.png");
-    this.load.image("floor1", "src/images/floor_1.png");
-    this.load.image("floor2", "src/images/floor_5.png");
-    this.load.image("floor3", "src/images/floor_6.png");
-    this.load.image("floor4", "src/images/floor_4.png");
-    this.load.image("floor4", "src/images/floor_4.png");
-    this.load.image("platform_move", "src/images/platform_move.png");
-    this.load.spritesheet("player1", "/src/images/dude.png", {
+    /* ---------- Mapa Videojuego ----------- */
+    this.load.tilemapTiledJSON("map", "./assets/map_test.json");
+
+    /* ---------- Imagen Fondo ----------- */
+    this.load.image("background", "./assets/images/fondo.png");
+    this.load.image("back_piso", "./assets/images/back_piso.png");
+    this.load.image("bg", "./assets/bg.png");
+    this.load.image("bg2", "./assets/images/background.png" );
+    this.load.image("tilePl", "./assets/images/platformTiled.png");
+    this.load.image("MainMenuTheme", "./assets/images/MainMenuTheme.png")
+
+    /* ---------- Imagenes Videojuego ----------- */
+    this.load.image("chain", "./assets/images/chain.png");
+    this.load.image("platform_mobile", "./assets/images/platform1.png");
+    this.load.image("platform_falling", "./assets/images/platform2.png");
+    this.load.image("plat1", "./assets/images/plat1.png");
+    this.load.image("plat_limite", "./assets/images/plat_limite.png");
+    this.load.image("plat_alta", "./assets/images/plat_alta.png");
+    this.load.image("plat_centro", "./assets/images/plat_centro.png");
+    this.load.image("plat_esc", "./assets/images/plat_esc.png");
+    this.load.image("plat_cuad", "./assets/images/plat_cuad.png");
+    this.load.image("plat_larga", "./assets/images/plat_larga.png");
+    this.load.image("plat4", "./assets/images/plat4.png");
+    this.load.image("tilesSet", "./assets/images/Tiles.png");
+    this.load.image("warrior", "./assets/images/warrior.png");
+
+    /* ---------- SpriteSheet Jugadores ----------- */
+    this.load.spritesheet("player1", "./assets/images/dude.png", {
       frameWidth: 32,
       frameHeight: 48,
     });
-    this.load.spritesheet("player2", "/src/images/dude.png", {
+    this.load.spritesheet("player2", "./assets/images/dude.png", {
       frameWidth: 32,
       frameHeight: 48,
     });
-    this.load.image("chain", "./src/images/chain.png");
+
+    /* ---------- Imagenes Botones Videojuego ----------- */
+    /* ---------- Imagenes Instrucciones ----------- */
+    /* ---------- AUudios Videojuego ----------- */
+    /* ---------- Imagenes Finales Videojuego ----------- */
+    /* --------------- Cinematicas ------------------- */
   }
 
   create() {
@@ -69,7 +89,6 @@ export class Preloader extends Scene {
       frameRate: 10,
       repeat: -1,
     });
-
 
     this.scene.start("MainMenu");
   }
