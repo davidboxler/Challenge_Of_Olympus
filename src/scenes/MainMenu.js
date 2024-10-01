@@ -19,7 +19,7 @@ export class MainMenu extends Scene
 
         gameText.on('pointerdown', () => {
 
-            this.scene.start('GameCapas');
+            this.scene.start('GameTest');
 
         });
         const optText = this.add.text(1250, 1000, 'Opciones', {
